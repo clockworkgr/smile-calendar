@@ -14,7 +14,7 @@
 		// minified (especially when both are regularly referenced in your plugin).
 
 		// Create the defaults once
-		var pluginName = "defaultPluginName",
+		var pluginName = "smileCalendar",
 			defaults = {
 				propertyName: "value"
 			};
@@ -43,12 +43,49 @@
 				// and this.settings
 				// you can add more functions like the one below and
 				// call them like the example below
-				this.yourOtherFunction( "jQuery Boilerplate" );
+				this.buildCalendarHTML();
 			},
-			yourOtherFunction: function( text ) {
+			buildCalendarHTML: function( ) {
 
 				// some logic
-				$( this.element ).text( text );
+				var classes= $( this.element ).attr('class');
+				var start=Number(moment().startOf('month').format('d'));
+				var end=Number(moment().endOf('month').format('D'));
+				var header="";
+				for(var i=0;i<7;i++) {
+					header=header+"<th>"+moment().day(i).format('dd')+"</th>";
+				}
+				var j=0;
+				var offset=start;
+				var rows=0;
+				var cal='';
+				if ((offset+end)%7>0) {
+					rows=Math.floor(((offset+end)/7)+1);
+				}else{
+					rows=Math.floor((offset+end)/7);
+				}
+				console.log(offset);
+				console.log(end);
+				console.log(rows);
+				var cell=0;
+				var day=1;
+				while (j<rows) {
+					cal=cal+"<tr>";
+					for(var k=0;k<7;k++) {
+						if (cell<start || day>end) {
+							cal=cal+"<td></td>";
+						}else{
+							cal=cal+"<td>"+day+"</td>";
+							day++;
+						}
+						cell++;
+					}					
+					cal=cal+"</tr>";
+					j++;
+				}
+				var month
+				var calendar=$('<div class="'+classes+'"><input type="hidden" name="" id=""/><div class="popOutCal"><table><thead><tr>'+header+'</tr></thead>'+cal+'</table></div></div>');
+				$( this.element ).replaceWith(calendar);
 			}
 		} );
 

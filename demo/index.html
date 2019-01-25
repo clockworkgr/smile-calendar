@@ -3,13 +3,14 @@
 	<head>
 		<title>jQuery Boilerplate</title>
 		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-		<script src="../src/jquery.boilerplate.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment-with-locales.min.js"></script>
+		<script src="../src/jquery.smile-calendar.js"></script>
 	</head>
 	<body>
-		<div id="element"></div>
+		<div id="element" class="element"></div>
 		<script>
 			$( function() {
-				$( "#element" ).defaultPluginName( {
+				$( "#element" ).smileCalendar( {
 					propertyName: "a custom value"
 				} );
 			} );
